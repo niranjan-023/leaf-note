@@ -77,4 +77,33 @@ router.put("/like/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// GET USER POSTS
+router.get("/my-posts", authMiddleware, async (req, res) => {
+  try {
+    const posts = await Post.find({ user: req.userId })
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// DELETE POST
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (post.user.toString() !== req.userId) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    await post.deleteOne();
+
+    res.json({ message: "Post deleted" });
+  } catch {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;

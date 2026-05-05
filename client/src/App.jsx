@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NewPost from "./pages/NewPost";
 import ReadMore from "./pages/ReadMore";
+import ViewPosts from "./pages/ViewPosts";
 
 function App() {
 	return (
@@ -49,6 +50,14 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<ReadMore />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/view-posts"
+				element={
+					<ProtectedRoute>
+						<ViewPosts />
 					</ProtectedRoute>
 				}
 			/>
