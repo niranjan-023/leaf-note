@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NewPost from "./pages/NewPost";
 import ReadMore from "./pages/ReadMore";
 import ViewPosts from "./pages/ViewPosts";
+import EditPost from "./pages/EditPost";
 
 function App() {
 	return (
@@ -58,6 +59,15 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<ViewPosts />
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path="/edit-post/:id"
+				element={
+					<ProtectedRoute>
+						<EditPost />
 					</ProtectedRoute>
 				}
 			/>

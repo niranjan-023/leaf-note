@@ -106,4 +106,28 @@ router.delete("/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// UPDATE POST
+router.put("/:id", authMiddleware, async (req, res) => {
+  try {
+    const { title, author, content, rating } = req.body;
+
+    const post = await Post.findById(req.params.id);
+
+    if (post.user.toString() !== req.userId) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    post.title = title;
+    post.author = author;
+    post.content = content;
+    post.rating = rating;
+
+    await post.save();
+
+    res.json({ message: "Post updated" });
+  } catch {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;
