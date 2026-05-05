@@ -9,6 +9,7 @@ import ReadMore from "./pages/ReadMore";
 import ViewPosts from "./pages/ViewPosts";
 import EditPost from "./pages/EditPost";
 import Profile from "./pages/Profile";
+import PublicRoute from "./components/PublicRoute";
 
 function App() {
 	return (
@@ -16,21 +17,39 @@ function App() {
 			<Route
 				path="/"
 				element={
-					<Layout showAuthButtons={true}>
-						<div className="text-center mt-20">
-							<h1 className="text-5xl font-semibold text-emerald-600 mb-4">
-								Welcome to LeafNote 🌿
-							</h1>
-							<p className="text-gray-600 text-lg">
-								Share your thoughts on books and explore others' insights.
-							</p>
-						</div>
-					</Layout>
+					<PublicRoute>
+						<Layout showAuthButtons={true}>
+							<div className="text-center mt-20">
+								<h1 className="text-5xl font-semibold text-emerald-600 mb-4">
+									Welcome to LeafNote 🌿
+								</h1>
+								<p className="text-gray-600 text-lg">
+									Share your thoughts on books and explore others' insights.
+								</p>
+							</div>
+						</Layout>
+					</PublicRoute>
 				}
 			/>
 
-			<Route path="/signup" element={<Signup />} />
-			<Route path="/login" element={<Login />} />
+			<Route
+				path="/login"
+				element={
+					<PublicRoute>
+						<Login />
+					</PublicRoute>
+				}
+			/>
+
+			<Route
+				path="/signup"
+				element={
+					<PublicRoute>
+						<Signup />
+					</PublicRoute>
+				}
+			/>
+
 			<Route
 				path="/home"
 				element={
