@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NewPost from "./pages/NewPost";
+import ReadMore from "./pages/ReadMore";
 
 function App() {
 	return (
@@ -40,6 +41,14 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<NewPost />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/post/:id"
+				element={
+					<ProtectedRoute>
+						<ReadMore />
 					</ProtectedRoute>
 				}
 			/>

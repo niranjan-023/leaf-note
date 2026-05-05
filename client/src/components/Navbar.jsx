@@ -14,12 +14,20 @@ function Navbar({ showAuthButtons = false }) {
 				{/* Right Side */}
 				<div className="flex items-center gap-4">
 					{token ? (
+						<>
 						<Link
 							to="/profile"
 							className="text-gray-600 hover:text-emerald-600 transition"
 						>
 							Profile
 						</Link>
+						<Link
+							to="/home"
+							className="text-emerald-600 hover:text-black-600 transition"
+						>
+							Home
+						</Link>
+						</>
 					) : (
 						<>
 							<Link to="/login">Login</Link>
