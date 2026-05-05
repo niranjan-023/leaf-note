@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <Routes>
-      {/* Landing Page */}
       <Route
         path="/"
         element={
@@ -20,6 +21,9 @@ function App() {
           </Layout>
         }
       />
+
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
