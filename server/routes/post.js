@@ -42,4 +42,16 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .populate("user", "name")
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;
