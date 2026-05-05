@@ -1,7 +1,9 @@
 function App() {
   return (
-    <div>
-      <h1>LeafNote 🌿</h1>
+    <div className="min-h-screen flex items-center justify-center bg-green-900">
+      <h1 className="text-4xl font-bold text-blue-600">
+        Tailwind Working 🚀
+      </h1>
     </div>
   );
 }
