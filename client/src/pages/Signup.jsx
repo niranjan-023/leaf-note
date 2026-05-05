@@ -1,7 +1,12 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
+import API from "../api";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Signup() {
+	const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -12,10 +17,18 @@ function Signup() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form); // backend later
-  };
+  const handleSubmit = async (e) => {
+	e.preventDefault();
+
+	try {
+		await API.post("/auth/signup", form);
+		alert("Signup successful");
+
+		navigate("/login");
+	} catch (error) {
+		alert(error.response?.data?.message || "Signup failed");
+	}
+   };
 
   return (
     <Layout showAuthButtons={true}>

@@ -1,7 +1,10 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
+import API from "../api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+	const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -11,10 +14,23 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form); // backend later
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await API.post("/auth/login", form);
+
+    // Save token
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    alert("Login successful");
+
+    navigate("/home"); // we’ll create this next
+  } catch (error) {
+    alert(error.response?.data?.message || "Login failed");
+  }
+};
 
   return (
     <Layout showAuthButtons={true}>
