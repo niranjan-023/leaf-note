@@ -8,6 +8,7 @@ import NewPost from "./pages/NewPost";
 import ReadMore from "./pages/ReadMore";
 import ViewPosts from "./pages/ViewPosts";
 import EditPost from "./pages/EditPost";
+import Profile from "./pages/Profile";
 
 function App() {
 	return (
@@ -68,6 +69,16 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<EditPost />
+					</ProtectedRoute>
+				}
+			/>
+
+
+			<Route
+				path="/profile"
+				element={
+					<ProtectedRoute>
+						<Profile />
 					</ProtectedRoute>
 				}
 			/>
