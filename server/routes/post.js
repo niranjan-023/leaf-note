@@ -54,4 +54,27 @@ router.get("/", async (req, res) => {
   }
 });
 
+// LIKE / UNLIKE POST
+router.put("/like/:id", authMiddleware, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    const alreadyLiked = post.likes.includes(req.userId);
+
+    if (alreadyLiked) {
+      post.likes = post.likes.filter(
+        (id) => id.toString() !== req.userId
+      );
+    } else {
+      post.likes.push(req.userId);
+    }
+
+    await post.save();
+
+    res.json(post);
+  } catch {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default router;
