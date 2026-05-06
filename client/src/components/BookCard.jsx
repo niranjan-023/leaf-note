@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 function BookCard({ book }) {
   const [cover, setCover] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +25,8 @@ function BookCard({ book }) {
         }
       } catch {
         console.log("Cover fetch failed");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -30,47 +34,118 @@ function BookCard({ book }) {
   }, []);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
-      
+    <div
+      className="
+        group
+        bg-white
+        rounded-3xl
+        overflow-hidden
+        border
+        border-gray-100
+        shadow-sm
+        hover:shadow-xl
+        hover:-translate-y-1
+        transition-all
+        duration-300
+        flex
+        flex-col
+      "
+    >
       {/* COVER */}
-      <div className="aspect-[2/3] bg-gray-100 overflow-hidden">
+      <div
+        className="
+          relative
+          aspect-[2/2.7]
+          bg-gray-100
+          overflow-hidden
+        "
+      >
+        {loading && (
+          <div className="absolute inset-0 skeleton" />
+        )}
+
         <img
           src={cover || "/images/default-cover-page.png"}
           alt={book.title}
-          className="w-full h-full object-cover"
+          className="
+            w-full
+            h-full
+            object-cover
+            group-hover:scale-[1.03]
+            transition
+            duration-500
+          "
         />
       </div>
 
       {/* CONTENT */}
       <div className="p-4 flex flex-col flex-1">
-        
-        <h2 className="font-semibold text-gray-800 line-clamp-2 min-h-[3.5rem]">
+
+        {/* TITLE */}
+        <h2
+          className="
+            text-[17px]
+            font-bold
+            text-slate-800
+            leading-snug
+            line-clamp-2
+            min-h-[3rem]
+          "
+        >
           {book.title}
         </h2>
 
-        <p className="text-sm text-gray-500 line-clamp-1 mt-1">
+        {/* AUTHOR */}
+        <p
+          className="
+            text-sm
+            text-gray-500
+            mt-1.5
+            line-clamp-1
+          "
+        >
           {book.author}
         </p>
 
-        {/* Stats */}
-        <div className="mt-3 space-y-1 text-sm">
-          <p className="text-yellow-500">
+        {/* STATS */}
+        <div
+          className="
+            flex
+            items-center
+            justify-between
+            mt-4
+            text-sm
+          "
+        >
+          <div className="text-yellow-500 font-semibold">
             ⭐ {book.avgRating}
-          </p>
+          </div>
 
-          <p className="text-emerald-600">
+          <div className="text-emerald-600 font-medium">
             ❤️ {book.totalLikes}
-          </p>
+          </div>
         </div>
 
-        {/* Button */}
+        {/* BUTTON */}
         <button
           onClick={() =>
             navigate(
               `/book-posts/${encodeURIComponent(book.normalizedTitle)}/${encodeURIComponent(book.normalizedAuthor)}`
             )
           }
-          className="mt-4 bg-emerald-500 text-white py-2 rounded-xl hover:bg-emerald-600 transition"
+          className="
+            mt-4
+            bg-emerald-500
+            hover:bg-emerald-600
+            text-white
+            py-2.5
+            rounded-2xl
+            transition
+            font-semibold
+            shadow-sm
+            hover:shadow-md
+            text-sm
+          "
         >
           View Posts
         </button>

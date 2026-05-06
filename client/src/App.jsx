@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import PublicRoute from "./components/PublicRoute";
 import Books from "./pages/Books";
 import BookPosts from "./pages/BookPosts";
+import { Link } from "react-router-dom";
 
 function App() {
 	return (
@@ -21,13 +22,101 @@ function App() {
 				element={
 					<PublicRoute>
 						<Layout showAuthButtons={true}>
-							<div className="text-center mt-20">
-								<h1 className="text-5xl font-semibold text-emerald-600 mb-4">
-									Welcome to LeafNote
+							<div className="
+    min-h-[75vh]
+    flex
+    flex-col
+    items-center
+    justify-center
+    text-center
+  ">
+
+								<div className="
+      w-24
+      h-24
+      rounded-3xl
+      bg-white
+      shadow-xl
+      flex
+      items-center
+      justify-center
+      mb-8
+      border
+      border-gray-100
+    ">
+									<img
+										src="/images/logo.png"
+										alt="LeafNote"
+										className="w-16 h-16 object-contain"
+									/>
+								</div>
+
+								<h1 className="
+      text-6xl
+      font-extrabold
+      tracking-tight
+      text-slate-800
+      leading-tight
+    ">
+									Welcome to{" "}
+									<span className="text-emerald-600">
+										LeafNote
+									</span>
 								</h1>
-								<p className="text-gray-600 text-lg">
-									Share your thoughts on books and explore others' insights.
+
+								<p className="
+      text-gray-500
+      text-xl
+      mt-6
+      max-w-2xl
+      leading-8
+    ">
+									Share book discussions, discover new reads,
+									and explore thoughts from a passionate reading community.
 								</p>
+
+								<div className="
+      flex
+      flex-col
+      sm:flex-row
+      gap-4
+      mt-10
+    ">
+
+									<Link
+										to="/signup"
+										className="
+          bg-emerald-500
+          hover:bg-emerald-600
+          text-white
+          px-8
+          py-4
+          rounded-2xl
+          font-semibold
+          shadow-lg
+          transition
+        "
+									>
+										Get Started
+									</Link>
+
+									<Link
+										to="/login"
+										className="
+          bg-white
+          hover:bg-gray-50
+          border
+          border-gray-200
+          px-8
+          py-4
+          rounded-2xl
+          font-semibold
+          transition
+        "
+									>
+										Login
+									</Link>
+								</div>
 							</div>
 						</Layout>
 					</PublicRoute>

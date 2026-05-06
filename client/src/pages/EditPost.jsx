@@ -62,51 +62,122 @@ function EditPost() {
 
   return (
     <Layout>
-      <div className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-        <h2 className="text-2xl font-semibold text-emerald-600 mb-6">
-          Edit Post
-        </h2>
+      <div className="
+        max-w-3xl
+        mx-auto
+        bg-white
+        rounded-3xl
+        border
+        border-gray-100
+        shadow-sm
+        p-8
+      ">
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="mb-8">
+          <h1 className="
+            text-4xl
+            font-extrabold
+            text-slate-800
+          ">
+            Edit Post
+          </h1>
+
+          <p className="text-gray-500 mt-3">
+            Share your thoughts with the community.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5"
+        >
+
           <input
             name="title"
-            value={form.title}
+            placeholder="Book title"
+			value={form.title}
             onChange={handleChange}
-            className="border p-3 rounded-lg"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+            "
             required
           />
 
           <input
             name="author"
-            value={form.author}
+            placeholder="Author"
+			value={form.author}
             onChange={handleChange}
-            className="border p-3 rounded-lg"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+            "
             required
           />
 
           <textarea
             name="content"
-            value={form.content}
+            placeholder="Write your thoughts..."
+			value={form.content}
             onChange={handleChange}
-            className="border p-3 rounded-lg"
-            rows="5"
+            rows="10"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+              resize-none
+            "
             required
           />
 
           <select
             name="rating"
-            value={form.rating}
+			value={form.rating}
             onChange={handleChange}
-            className="border p-3 rounded-lg"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+            "
           >
-            {[1,2,3,4,5].map(num => (
+            {[1,2,3,4,5].map((num) => (
               <option key={num} value={num}>
                 {num} Star
               </option>
             ))}
           </select>
 
-          <button className="bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600">
+          <button
+            className="
+              bg-emerald-500
+              hover:bg-emerald-600
+              text-white
+              py-4
+              rounded-2xl
+              transition
+              font-semibold
+              shadow-md
+            " 
+          >
             Update Post
           </button>
         </form>

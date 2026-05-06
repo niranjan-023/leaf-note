@@ -1,31 +1,84 @@
 import API from "../api";
 import { useNavigate } from "react-router-dom";
 
-function PostCard({ post, posts, setPosts, user }) {
+function PostCard({ post, setPosts, user }) {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white p-5 rounded-2xl shadow-sm hover:shadow-md transition w-full max-w-2xl">
-      
-      <h2 className="text-xl font-semibold text-gray-800 line-clamp-2">
-        {post.title}
-      </h2>
+    <div className="
+      group
+      bg-white/90
+      backdrop-blur
+      rounded-3xl
+      border
+      border-gray-100
+      shadow-sm
+      hover:shadow-2xl
+      hover:-translate-y-1
+      transition-all
+      duration-300
+      p-6
+      w-full
+      max-w-2xl
+    ">
 
-      <p className="text-gray-500 text-sm mt-1 line-clamp-1">
-        {post.author}
-      </p>
+      {/* HEADER */}
+      <div className="flex items-start justify-between gap-4">
 
-      {/* Increased content lines */}
-      <p className="text-gray-600 mt-3 line-clamp-6 leading-relaxed">
+        <div>
+          <h2 className="
+            text-2xl
+            font-bold
+            text-slate-800
+            line-clamp-2
+            leading-snug
+          ">
+            {post.title}
+          </h2>
+
+          <p className="
+            text-sm
+            text-gray-500
+            mt-2
+            line-clamp-1
+          ">
+            {post.author}
+          </p>
+        </div>
+
+        {/* RATING */}
+        <div className="
+          text-yellow-500
+          text-sm
+          whitespace-nowrap
+          font-medium
+        ">
+          {"⭐".repeat(post.rating)}
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <p className="
+        mt-5
+        text-gray-700
+        leading-8
+        line-clamp-6
+        text-[15px]
+      ">
         {post.content}
       </p>
 
-      <div className="mt-3 text-yellow-500">
-        {"⭐".repeat(post.rating)}
-      </div>
+      {/* FOOTER */}
+      <div className="
+        mt-6
+        flex
+        items-center
+        justify-between
+        border-t
+        border-gray-100
+        pt-4
+      ">
 
-      <div className="flex justify-between items-center mt-4">
-        
         {/* LIKE */}
         <button
           onClick={async () => {
@@ -51,13 +104,17 @@ function PostCard({ post, posts, setPosts, user }) {
               alert("Error liking post");
             }
           }}
-          className={`${
-            Array.isArray(post.likes) &&
-            user &&
-            post.likes.some((id) => id === user.id)
-              ? "text-red-500"
-              : "text-emerald-600"
-          } hover:underline`}
+          className={`
+            transition
+            font-medium
+            ${
+              Array.isArray(post.likes) &&
+              user &&
+              post.likes.some((id) => id === user.id)
+                ? "text-red-500"
+                : "text-emerald-600 hover:text-emerald-700"
+            }
+          `}
         >
           ❤️ {Array.isArray(post.likes) ? post.likes.length : 0}
         </button>
@@ -65,9 +122,15 @@ function PostCard({ post, posts, setPosts, user }) {
         {/* READ MORE */}
         <button
           onClick={() => navigate(`/post/${post._id}`)}
-          className="text-blue-500 hover:underline"
+          className="
+            text-sm
+            font-semibold
+            text-blue-500
+            hover:text-blue-600
+            transition
+          "
         >
-          Read More
+          Read More →
         </button>
       </div>
     </div>

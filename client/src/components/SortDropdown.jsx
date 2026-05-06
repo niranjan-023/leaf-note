@@ -3,7 +3,21 @@ function SortDropdown({ value, onChange }) {
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="border bg-white px-4 py-2 rounded-xl shadow-sm"
+      className="
+        bg-white
+        border
+        border-gray-200
+        rounded-2xl
+        px-5
+        py-3
+        shadow-sm
+        hover:shadow-md
+        focus:outline-none
+        focus:ring-2
+        focus:ring-emerald-400
+        transition
+        font-medium
+      "
     >
       <option value="relevant">Most Relevant</option>
       <option value="rating">Highest Rating</option>

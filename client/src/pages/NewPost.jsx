@@ -4,6 +4,8 @@ import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 function NewPost() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     title: "",
     author: "",
@@ -11,10 +13,11 @@ function NewPost() {
     rating: 1,
   });
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -29,8 +32,8 @@ function NewPost() {
         },
       });
 
-      alert("Post created!");
       navigate("/home");
+
     } catch {
       alert("Error creating post");
     }
@@ -38,17 +41,49 @@ function NewPost() {
 
   return (
     <Layout>
-      <div className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md">
-        <h2 className="text-2xl font-semibold text-emerald-600 mb-6">
-          New Post
-        </h2>
+      <div className="
+        max-w-3xl
+        mx-auto
+        bg-white
+        rounded-3xl
+        border
+        border-gray-100
+        shadow-sm
+        p-8
+      ">
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="mb-8">
+          <h1 className="
+            text-4xl
+            font-extrabold
+            text-slate-800
+          ">
+            Create New Post
+          </h1>
+
+          <p className="text-gray-500 mt-3">
+            Share your thoughts with the community.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5"
+        >
+
           <input
             name="title"
-            placeholder="Book Title"
+            placeholder="Book title"
             onChange={handleChange}
-            className="border p-3 rounded-lg"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+            "
             required
           />
 
@@ -56,33 +91,69 @@ function NewPost() {
             name="author"
             placeholder="Author"
             onChange={handleChange}
-            className="border p-3 rounded-lg"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+            "
             required
           />
 
           <textarea
             name="content"
-            placeholder="Your thoughts..."
+            placeholder="Write your thoughts..."
             onChange={handleChange}
-            className="border p-3 rounded-lg"
-            rows="5"
+            rows="10"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+              resize-none
+            "
             required
           />
 
           <select
             name="rating"
             onChange={handleChange}
-            className="border p-3 rounded-lg"
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+            "
           >
-            {[1,2,3,4,5].map(num => (
+            {[1,2,3,4,5].map((num) => (
               <option key={num} value={num}>
                 {num} Star
               </option>
             ))}
           </select>
 
-          <button className="bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600">
-            Submit
+          <button
+            className="
+              bg-emerald-500
+              hover:bg-emerald-600
+              text-white
+              py-4
+              rounded-2xl
+              transition
+              font-semibold
+              shadow-md
+            "
+          >
+            Publish Post
           </button>
         </form>
       </div>

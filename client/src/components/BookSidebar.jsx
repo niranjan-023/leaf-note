@@ -28,17 +28,41 @@ function BookSidebar({ title, author }) {
   }, [title, author]);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-5 sticky top-24">
-      
-      <h2 className="text-2xl font-semibold text-gray-800 leading-snug">
+    <div className="
+      sticky
+      top-24
+      bg-white
+      rounded-3xl
+      border
+      border-gray-100
+      shadow-sm
+      p-6
+      h-fit
+    ">
+
+      <h2 className="
+        text-3xl
+        font-bold
+        text-slate-800
+        leading-tight
+      ">
         {title}
       </h2>
 
-      <p className="text-gray-500 mt-2">
+      <p className="
+        text-gray-500
+        mt-3
+        text-lg
+      ">
         {author}
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-xl">
+      <div className="
+        mt-6
+        overflow-hidden
+        rounded-2xl
+        shadow-md
+      ">
         <img
           src={cover || "/images/default-cover-page.png"}
           alt={title}

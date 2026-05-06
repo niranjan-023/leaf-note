@@ -1,78 +1,148 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
 import API from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { clearAuth } from "../utils/auth";
 
 function Login() {
-	const navigate = useNavigate();
-	const [form, setForm] = useState({
-		email: "",
-		password: "",
-	});
+  const navigate = useNavigate();
 
-	const handleChange = (e) => {
-		setForm({ ...form, [e.target.name]: e.target.value });
-	};
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-		try {
-			// Clear old session first
-			clearAuth();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-			const res = await API.post("/auth/login", form);
+    try {
+      clearAuth();
 
-			localStorage.setItem("token", res.data.token);
-			localStorage.setItem("user", JSON.stringify(res.data.user));
+      const res = await API.post("/auth/login", form);
 
-			alert("Login successful");
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-			navigate("/home");
-		} catch (error) {
-			alert(error.response?.data?.message || "Login failed");
-		}
-	};
+      navigate("/home");
 
-	return (
-		<Layout showAuthButtons={true}>
-			<div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-md mt-10">
-				<h2 className="text-2xl font-semibold text-center text-emerald-600 mb-6">
-					Welcome Back
-				</h2>
+    } catch (error) {
+      alert(error.response?.data?.message || "Login failed");
+    }
+  };
 
-				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
-					<input
-						type="email"
-						name="email"
-						placeholder="Email"
-						value={form.email}
-						onChange={handleChange}
-						className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
-						required
-					/>
+  return (
+    <Layout showAuthButtons={true}>
+      <div className="
+        max-w-md
+        mx-auto
+        bg-white
+        rounded-3xl
+        border
+        border-gray-100
+        shadow-sm
+        p-8
+        mt-10
+      ">
 
-					<input
-						type="password"
-						name="password"
-						placeholder="Password"
-						value={form.password}
-						onChange={handleChange}
-						className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
-						required
-					/>
+        <div className="text-center mb-8">
 
-					<button
-						type="submit"
-						className="bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition"
-					>
-						Login
-					</button>
-				</form>
-			</div>
-		</Layout>
-	);
+          <h1 className="
+            text-4xl
+            font-extrabold
+            text-slate-800
+          ">
+            Welcome Back
+          </h1>
+
+          <p className="text-gray-500 mt-3">
+            Continue your reading journey.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5"
+        >
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            value={form.email}
+            onChange={handleChange}
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+              transition
+            "
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="
+              border
+              border-gray-200
+              p-4
+              rounded-2xl
+              focus:outline-none
+              focus:ring-2
+              focus:ring-emerald-400
+              transition
+            "
+            required
+          />
+
+          <button
+            type="submit"
+            className="
+              bg-emerald-500
+              hover:bg-emerald-600
+              text-white
+              py-4
+              rounded-2xl
+              transition
+              font-semibold
+              shadow-md
+            "
+          >
+            Login
+          </button>
+        </form>
+
+        <p className="
+          text-center
+          text-sm
+          text-gray-500
+          mt-6
+        ">
+          Don’t have an account?{" "}
+          <Link
+            to="/signup"
+            className="text-emerald-600 font-medium"
+          >
+            Sign Up
+          </Link>
+        </p>
+      </div>
+    </Layout>
+  );
 }
 
 export default Login;
