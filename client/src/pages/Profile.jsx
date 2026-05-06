@@ -85,7 +85,7 @@ function Profile() {
 						onClick={() => navigate("/view-posts")}
 						className="bg-gray-100 py-3 rounded-xl hover:bg-gray-200"
 					>
-						View Posts
+						My Posts
 					</button>
 
 					{/* LOGOUT */}
