@@ -118,11 +118,11 @@ function BookCard({ book }) {
           "
         >
           <div className="text-yellow-500 font-semibold">
-            ⭐ {book.avgRating}
+            Rating: {book.avgRating}⭐ 
           </div>
 
-          <div className="text-emerald-600 font-medium">
-            ❤️ {book.totalLikes}
+          <div className="text-pink-500 font-medium">
+            Likes: {book.totalLikes}❤️
           </div>
         </div>
 

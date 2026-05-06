@@ -112,11 +112,18 @@ function PostCard({ post, setPosts, user }) {
               user &&
               post.likes.some((id) => id === user.id)
                 ? "text-red-500"
-                : "text-emerald-600 hover:text-emerald-700"
+                : "text-grey-600 hover:text-emerald-700"
             }
           `}
         >
-          ❤️ {Array.isArray(post.likes) ? post.likes.length : 0}
+			{
+              Array.isArray(post.likes) &&
+              user &&
+              post.likes.some((id) => id === user.id)
+                ? "❤️Likes " + (Array.isArray(post.likes) ? post.likes.length : 0)
+                : "🩶Like "
+            }
+           
         </button>
 
         {/* READ MORE */}
