@@ -11,6 +11,7 @@ import EditPost from "./pages/EditPost";
 import Profile from "./pages/Profile";
 import PublicRoute from "./components/PublicRoute";
 import Books from "./pages/Books";
+import BookPosts from "./pages/BookPosts";
 
 function App() {
 	return (
@@ -108,6 +109,15 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<Books />
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path="/book-posts/:title/:author"
+				element={
+					<ProtectedRoute>
+						<BookPosts />
 					</ProtectedRoute>
 				}
 			/>
