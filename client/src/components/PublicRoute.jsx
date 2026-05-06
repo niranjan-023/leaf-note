@@ -1,10 +1,11 @@
 import { Navigate } from "react-router-dom";
+import { isTokenValid } from "../utils/auth";
 
 function PublicRoute({ children }) {
-  const token = localStorage.getItem("token");
+  const valid = isTokenValid();
 
-  if (token) {
-    return <Navigate to="/home" />;
+  if (valid) {
+    return <Navigate to="/home" replace />;
   }
 
   return children;
