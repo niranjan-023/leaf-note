@@ -14,6 +14,15 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		normalizedTitle: {
+			type: String,
+			required: true,
+		},
+
+		normalizedAuthor: {
+			type: String,
+			required: true,
+		},
 		content: {
 			type: String,
 			required: true,

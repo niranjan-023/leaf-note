@@ -28,7 +28,9 @@ function ReadMore() {
             setCover(
               `https://covers.openlibrary.org/b/id/${data.docs[0].cover_i}-L.jpg`
             );
-          }
+          } else {
+			setCover(`/images/default-cover-page.png`);
+		  }
         }
       } catch {
         console.log("Error loading post");
