@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 import postRoutes from "./routes/post.js";
+import bookRoutes from "./routes/books.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/books", bookRoutes);
 
 // DB Connection
 mongoose.connect(process.env.MONGO_URI)
