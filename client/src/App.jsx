@@ -10,6 +10,7 @@ import ViewPosts from "./pages/ViewPosts";
 import EditPost from "./pages/EditPost";
 import Profile from "./pages/Profile";
 import PublicRoute from "./components/PublicRoute";
+import Books from "./pages/Books";
 
 function App() {
 	return (
@@ -98,6 +99,15 @@ function App() {
 				element={
 					<ProtectedRoute>
 						<Profile />
+					</ProtectedRoute>
+				}
+			/>
+
+			<Route
+				path="/books"
+				element={
+					<ProtectedRoute>
+						<Books />
 					</ProtectedRoute>
 				}
 			/>
