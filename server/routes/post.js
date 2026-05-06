@@ -47,9 +47,25 @@ router.post("/", authMiddleware, async (req, res) => {
 
 router.get("/", async (req, res) => {
 	try {
-		const posts = await Post.find()
-			.populate("user", "name")
-			.sort({ createdAt: -1 });
+		const posts = await Post.aggregate([
+			{
+				$addFields: {
+					likesCount: { $size: "$likes" },
+				},
+			},
+			{
+				$sort: {
+					likesCount: -1,
+					rating: -1,
+					createdAt: -1,
+				},
+			},
+		]);
+
+		await Post.populate(posts, {
+			path: "user",
+			select: "name",
+		});
 
 		res.json(posts);
 	} catch {
