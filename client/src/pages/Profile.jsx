@@ -120,12 +120,12 @@ function Profile() {
             p-6
             text-center
           ">
-            <p className="text-3xl font-bold text-slate-800">
+            <p className="text-3xl font-bold text-blue-500">
               {posts.length}
             </p>
 
-            <p className="text-gray-500 mt-2">
-              Posts
+            <p className="text-blue-400 mt-2">
+              Posts ✍️
             </p>
           </div>
 
@@ -135,12 +135,12 @@ function Profile() {
             p-6
             text-center
           ">
-            <p className="text-3xl font-bold text-slate-800">
+            <p className="text-3xl font-bold text-pink-600">
               {totalLikes}
             </p>
 
-            <p className="text-gray-500 mt-2">
-              Likes
+            <p className="text-pink-400 mt-2">
+              Likes ❤️
             </p>
           </div>
         </div>

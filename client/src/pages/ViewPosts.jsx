@@ -189,8 +189,8 @@ function ViewPosts() {
                     pt-4
                   ">
 
-                    <span className="text-emerald-600 font-medium">
-                      ❤️ {post.likes.length}
+                    <span className="text-pink-500 font-medium">
+                      Likes: {post.likes.length}❤️
                     </span>
 
                     <div className="flex gap-4">
