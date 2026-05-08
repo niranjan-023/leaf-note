@@ -12,6 +12,11 @@ function Profile() {
 
   const token = localStorage.getItem("token");
 
+  const handleLogout = () => {
+    clearAuth();
+    navigate("/");
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,10 +44,7 @@ function Profile() {
     fetchData();
   }, []);
 
-  const handleLogout = () => {
-    clearAuth();
-    navigate("/login");
-  };
+  
 
   const totalLikes = posts.reduce(
     (sum, post) => sum + (post.likes?.length || 0),

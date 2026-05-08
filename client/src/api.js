@@ -2,7 +2,7 @@ import axios from "axios";
 import { clearAuth } from "./utils/auth";
 
 const API = axios.create({
-  baseURL: "http://192.168.207.50:5000/api",
+  baseURL: "http://localhost:5000/api",
 });
 
 API.interceptors.response.use(
@@ -10,7 +10,7 @@ API.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       clearAuth();
-      window.location.href = "/login";
+      window.location.href = "/";
     }
 
     return Promise.reject(error);
