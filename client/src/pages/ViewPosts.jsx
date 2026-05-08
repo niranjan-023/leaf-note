@@ -22,7 +22,6 @@ function ViewPosts() {
         });
 
         setPosts(res.data);
-
       } catch {
         console.log("Error fetching posts");
       } finally {
@@ -44,9 +43,9 @@ function ViewPosts() {
 
   return (
     <Layout>
-
       {/* HEADER */}
-      <div className="
+      <div
+        className="
         flex
         flex-col
         sm:flex-row
@@ -55,11 +54,10 @@ function ViewPosts() {
         sm:items-center
         gap-4
         mb-10
-      ">
+      "
+      >
         <div>
-          <h1 className="text-4xl font-extrabold text-slate-800">
-            My Posts
-          </h1>
+          <h1 className="text-4xl font-extrabold text-slate-800">My Posts</h1>
 
           <p className="text-gray-500 mt-2">
             Manage and organize your discussions.
@@ -89,24 +87,24 @@ function ViewPosts() {
 
       {/* LOADING */}
       {loading ? (
-        <div className="
+        <div
+          className="
           grid
           grid-cols-1
           md:grid-cols-2
           gap-6
-        ">
+        "
+        >
           {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="skeleton h-72 rounded-3xl"
-            />
+            <div key={i} className="skeleton h-72 rounded-3xl" />
           ))}
         </div>
       ) : (
         <>
           {/* EMPTY */}
           {sortedPosts.length === 0 ? (
-            <div className="
+            <div
+              className="
               bg-white
               rounded-3xl
               p-12
@@ -114,7 +112,8 @@ function ViewPosts() {
               shadow-sm
               border
               border-gray-100
-            ">
+            "
+            >
               <h2 className="text-2xl font-bold text-gray-700">
                 No posts created yet ✍️
               </h2>
@@ -124,14 +123,15 @@ function ViewPosts() {
               </p>
             </div>
           ) : (
-
             /* POSTS */
-            <div className="
+            <div
+              className="
               grid
               grid-cols-1
               md:grid-cols-2
               gap-6
-            ">
+            "
+            >
               {sortedPosts.map((post) => (
                 <div
                   key={post._id}
@@ -146,40 +146,62 @@ function ViewPosts() {
                     p-6
                   "
                 >
-
-                  <h2 className="
+                  <h2
+                    className="
                     text-xl
                     font-bold
                     line-clamp-2
                     text-slate-800
-                  ">
+                  "
+                  >
                     {post.title}
                   </h2>
 
-                  <p className="
+                  <p
+                    className="
                     text-sm
                     text-gray-500
                     mt-2
                     line-clamp-1
-                  ">
+                  "
+                  >
                     {post.author}
                   </p>
 
-                  <p className="
+                  <p
+                    className="
                     text-gray-700
                     mt-4
                     line-clamp-4
                     leading-7
-                  ">
+                  "
+                  >
                     {post.content}
                   </p>
+
+				  {/* READ MORE */}
+                  <button
+                    onClick={() => navigate(`/post/${post._id}`)}
+                    className="
+            text-sm
+            font-semibold
+            text-blue-500
+            hover:text-blue-600
+            transition
+          "
+                  >
+                    Read More →
+                  </button>
 
                   <div className="mt-4 text-yellow-500">
                     {"⭐".repeat(post.rating)}
                   </div>
 
+                  
+
                   {/* ACTIONS */}
-                  <div className="
+                  <div
+                    className="
                     flex
                     justify-between
                     items-center
@@ -187,18 +209,15 @@ function ViewPosts() {
                     border-t
                     border-gray-100
                     pt-4
-                  ">
-
+                  "
+                  >
                     <span className="text-pink-500 font-medium">
                       Likes: {post.likes.length}❤️
                     </span>
 
                     <div className="flex gap-4">
-
                       <button
-                        onClick={() =>
-                          navigate(`/edit-post/${post._id}`)
-                        }
+                        onClick={() => navigate(`/edit-post/${post._id}`)}
                         className="
                           text-blue-500
                           hover:text-blue-600
@@ -222,9 +241,8 @@ function ViewPosts() {
                             });
 
                             setPosts((prev) =>
-                              prev.filter((p) => p._id !== post._id)
+                              prev.filter((p) => p._id !== post._id),
                             );
-
                           } catch {
                             alert("Error deleting post");
                           }
@@ -237,7 +255,6 @@ function ViewPosts() {
                       >
                         Delete
                       </button>
-
                     </div>
                   </div>
                 </div>

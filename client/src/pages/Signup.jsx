@@ -27,7 +27,7 @@ function Signup() {
       clearAuth();
 
       await API.post("/auth/signup", form);
-
+		alert("Account Created Successfully, Please Login to continue")
       navigate("/login");
 
     } catch (error) {

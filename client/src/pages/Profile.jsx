@@ -122,11 +122,11 @@ function Profile() {
             p-6
             text-center
           ">
-            <p className="text-3xl font-bold text-blue-500">
+            <p className="text-3xl font-bold text-blue-400">
               {posts.length}
             </p>
 
-            <p className="text-blue-400 mt-2">
+            <p className="text-blue-500 mt-2">
               Posts ✍️
             </p>
           </div>
@@ -141,7 +141,7 @@ function Profile() {
               {totalLikes}
             </p>
 
-            <p className="text-pink-400 mt-2">
+            <p className="text-pink-500 mt-2">
               Likes ❤️
             </p>
           </div>
