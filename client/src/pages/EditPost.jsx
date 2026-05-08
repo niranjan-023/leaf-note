@@ -2,10 +2,13 @@ import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from "../api";
+import { validateContentSafety } from "../utils/moderation";
 
 function EditPost() {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const [checking, setChecking] = useState(false);
 
   const [form, setForm] = useState({
     title: "",
@@ -14,11 +17,11 @@ function EditPost() {
     rating: 1,
   });
 
-  // Fetch post data
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const res = await API.get("/posts");
+
         const post = res.data.find((p) => p._id === id);
 
         if (post) {
@@ -38,13 +41,40 @@ function EditPost() {
   }, [id]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setChecking(true);
+
+      // CONCATENATED TEXT
+      const combinedText = `
+        ${form.title}
+        ${form.author}
+        ${form.content}
+      `;
+
+      // MODERATION CHECK
+      const moderation = await validateContentSafety(
+        combinedText
+      );
+
+      // BLOCK UNSAFE
+      if (moderation.prediction === 0) {
+        alert(
+          "Your post contains inappropriate or unsafe content."
+        );
+
+        setChecking(false);
+        return;
+      }
+
       const token = localStorage.getItem("token");
 
       await API.put(`/posts/${id}`, form, {
@@ -54,9 +84,13 @@ function EditPost() {
       });
 
       alert("Post updated!");
-      navigate("/home");
+
+      navigate("/view-posts");
+
     } catch {
       alert("Error updating post");
+    } finally {
+      setChecking(false);
     }
   };
 
@@ -95,7 +129,7 @@ function EditPost() {
           <input
             name="title"
             placeholder="Book title"
-			value={form.title}
+            value={form.title}
             onChange={handleChange}
             className="
               border
@@ -112,7 +146,7 @@ function EditPost() {
           <input
             name="author"
             placeholder="Author"
-			value={form.author}
+            value={form.author}
             onChange={handleChange}
             className="
               border
@@ -129,7 +163,7 @@ function EditPost() {
           <textarea
             name="content"
             placeholder="Write your thoughts..."
-			value={form.content}
+            value={form.content}
             onChange={handleChange}
             rows="10"
             className="
@@ -147,7 +181,7 @@ function EditPost() {
 
           <select
             name="rating"
-			value={form.rating}
+            value={form.rating}
             onChange={handleChange}
             className="
               border
@@ -167,18 +201,22 @@ function EditPost() {
           </select>
 
           <button
+            disabled={checking}
             className="
               bg-emerald-500
               hover:bg-emerald-600
+              disabled:bg-gray-400
               text-white
               py-4
               rounded-2xl
               transition
               font-semibold
               shadow-md
-            " 
+            "
           >
-            Update Post
+            {checking
+              ? "Validating Content..."
+              : "Update Post"}
           </button>
         </form>
       </div>

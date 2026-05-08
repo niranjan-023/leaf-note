@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { useState } from "react";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
+import { validateContentSafety } from "../utils/moderation";
 
 function NewPost() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function NewPost() {
     content: "",
     rating: 1,
   });
+
+  const [checking, setChecking] = useState(false);
 
   const handleChange = (e) => {
     setForm({
@@ -24,6 +27,31 @@ function NewPost() {
     e.preventDefault();
 
     try {
+      setChecking(true);
+
+      // CONCATENATED TEXT
+      const combinedText = `
+        ${form.title}
+        ${form.author}
+        ${form.content}
+      `;
+
+      // MODERATION CHECK
+      const moderation = await validateContentSafety(
+        combinedText
+      );
+
+      // BLOCK UNSAFE
+      if (moderation.prediction === 0) {
+        alert(
+          "Your post contains inappropriate or unsafe content."
+        );
+
+        setChecking(false);
+        return;
+      }
+
+      // CREATE POST
       const token = localStorage.getItem("token");
 
       await API.post("/posts", form, {
@@ -32,10 +60,12 @@ function NewPost() {
         },
       });
 
-      navigate("/home");
+      navigate("/view-posts");
 
     } catch {
       alert("Error creating post");
+    } finally {
+      setChecking(false);
     }
   };
 
@@ -142,9 +172,11 @@ function NewPost() {
           </select>
 
           <button
+            disabled={checking}
             className="
               bg-emerald-500
               hover:bg-emerald-600
+              disabled:bg-gray-400
               text-white
               py-4
               rounded-2xl
@@ -153,7 +185,9 @@ function NewPost() {
               shadow-md
             "
           >
-            Publish Post
+            {checking
+              ? "Validating Content..."
+              : "Publish Post"}
           </button>
         </form>
       </div>
