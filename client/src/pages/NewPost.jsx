@@ -60,6 +60,7 @@ function NewPost() {
         },
       });
 
+	  alert("Post published!");
       navigate("/view-posts");
 
     } catch {
