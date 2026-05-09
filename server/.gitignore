@@ -10,6 +10,7 @@ bower_components/
 .env*
 !.env.example
 !.env.sample
+.env.local
 
 ########################################
 # Logs (any depth)
