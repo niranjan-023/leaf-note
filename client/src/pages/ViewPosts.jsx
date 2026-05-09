@@ -121,6 +121,25 @@ function ViewPosts() {
               <p className="text-gray-500 mt-3">
                 Start sharing your reading experience.
               </p>
+
+			  <div className="flex flex-col gap-4 mt-10">
+
+          <button
+            onClick={() => navigate("/new-post")}
+            className="
+              bg-emerald-500
+              hover:bg-emerald-600
+              text-white
+              py-3
+              rounded-2xl
+              transition
+              font-semibold
+              shadow-md
+            "
+          >
+            + New Post
+          </button>
+		  </div>
             </div>
           ) : (
             /* POSTS */
