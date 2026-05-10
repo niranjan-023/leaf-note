@@ -12,7 +12,7 @@ export async function validateContentSafety(text) {
 				text
 			},
 			{
-				timeout: 7000,
+				timeout: 10000,
 			}
 
 		);
