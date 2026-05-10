@@ -49,7 +49,7 @@ Built using React, Node.js, Express, MongoDB Atlas, JWT Authentication, Tailwind
 
 ## 🛡️ AI Content Moderation
 
-LeafNote integrates **SentinelAI**, an AI-powered moderation system developed separately for detecting unsafe or harmful text content before posts are published.
+LeafNote integrates **SentinelAI**, an AI-powered moderation system developed for detecting unsafe or harmful text content before posts are published.
 
 Moderation happens during:
 - Post creation
