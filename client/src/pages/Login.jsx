@@ -12,6 +12,8 @@ function Login() {
     password: "",
   });
 
+  const [checking, setChecking] = useState(false);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -23,17 +25,19 @@ function Login() {
     e.preventDefault();
 
     try {
+		setChecking(true);
       clearAuth();
 
       const res = await API.post("/auth/login", form);
 
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
+      localStorage.setItem("user", JSON.stringify(res.data.user));setChecking(false);
       navigate("/home");
 
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
+    } finally {
+      setChecking(false);
     }
   };
 
@@ -111,9 +115,11 @@ function Login() {
 
           <button
             type="submit"
+			disabled={checking}
             className="
               bg-emerald-500
               hover:bg-emerald-600
+			  disabled:bg-gray-400
               text-white
               py-4
               rounded-2xl
@@ -122,7 +128,7 @@ function Login() {
               shadow-md
             "
           >
-            Login
+			{checking ? "Loggin In..." : "Login"}
           </button>
         </form>
 

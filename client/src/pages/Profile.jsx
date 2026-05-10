@@ -11,9 +11,12 @@ function Profile() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const [checking, setChecking] = useState(false);
 
   const handleLogout = () => {
+	setChecking(true);
     clearAuth();
+	setChecking(false);
     navigate("/");
   };
 
@@ -182,9 +185,11 @@ function Profile() {
 
           <button
             onClick={handleLogout}
+			disabled={checking}
             className="
               bg-red-500
               hover:bg-red-600
+			  disabled:bg-gray-400
               text-white
               py-3
               rounded-2xl
@@ -194,7 +199,7 @@ function Profile() {
               mt-3
             "
           >
-            Logout
+			{checking ? "Logging Out" : "Logout"}
           </button>
         </div>
       </div>

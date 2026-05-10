@@ -13,6 +13,8 @@ function Signup() {
     password: "",
   });
 
+  const [checking, setChecking] = useState(false);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -24,14 +26,19 @@ function Signup() {
     e.preventDefault();
 
     try {
+		setChecking(true);
       clearAuth();
 
       await API.post("/auth/signup", form);
-		alert("Account Created Successfully, Please Login to continue")
+	  setChecking(false);
+		alert("Account Created Successfully, Please Login to continue");
+		
       navigate("/login");
 
     } catch (error) {
       alert(error.response?.data?.message || "Signup failed");
+    } finally {
+      setChecking(false);
     }
   };
 
@@ -125,9 +132,11 @@ function Signup() {
 
           <button
             type="submit"
+			disabled={checking}
             className="
               bg-emerald-500
               hover:bg-emerald-600
+			  disabled:bg-gray-400
               text-white
               py-4
               rounded-2xl
@@ -136,7 +145,7 @@ function Signup() {
               shadow-md
             "
           >
-            Create Account
+			{checking ? "Signing up..." : "Create Account"}
           </button>
         </form>
 
