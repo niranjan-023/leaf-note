@@ -51,19 +51,43 @@ function ViewPosts() {
         sm:flex-row
         justify-between
         items-start
-        sm:items-center
-        gap-4
+        sm:items-start
+        gap-6
         mb-10
       "
       >
-        <div>
-          <h1 className="text-4xl font-extrabold text-slate-800">My Posts</h1>
+        {/* LEFT SECTION */}
+        <div className="flex flex-col">
+          <h1 className="text-4xl font-extrabold text-slate-800">
+            My Posts
+          </h1>
 
           <p className="text-gray-500 mt-2">
-            Manage and organize your discussions.
+            Manage and organize your Posts.
           </p>
+
+          {/* NEW POST BUTTON */}
+          <button
+            onClick={() => navigate("/new-post")}
+            className="
+              mt-5
+              w-fit
+              bg-emerald-500
+              hover:bg-emerald-600
+              text-white
+              px-6
+              py-3
+              rounded-2xl
+              transition
+              font-semibold
+              shadow-md
+            "
+          >
+            + New Post
+          </button>
         </div>
 
+        {/* SORT */}
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
@@ -121,25 +145,6 @@ function ViewPosts() {
               <p className="text-gray-500 mt-3">
                 Start sharing your reading experience.
               </p>
-
-			  <div className="flex flex-col gap-4 mt-10">
-
-          <button
-            onClick={() => navigate("/new-post")}
-            className="
-              bg-emerald-500
-              hover:bg-emerald-600
-              text-white
-              py-3
-              rounded-2xl
-              transition
-              font-semibold
-              shadow-md
-            "
-          >
-            + New Post
-          </button>
-		  </div>
             </div>
           ) : (
             /* POSTS */
@@ -198,16 +203,17 @@ function ViewPosts() {
                     {post.content}
                   </p>
 
-				  {/* READ MORE */}
+                  {/* READ MORE */}
                   <button
                     onClick={() => navigate(`/post/${post._id}`)}
                     className="
-            text-sm
-            font-semibold
-            text-blue-500
-            hover:text-blue-600
-            transition
-          "
+                      text-sm
+                      font-semibold
+                      text-blue-500
+                      hover:text-blue-600
+                      transition
+                      mt-4
+                    "
                   >
                     Read More →
                   </button>
@@ -215,8 +221,6 @@ function ViewPosts() {
                   <div className="mt-4 text-yellow-500">
                     {"⭐".repeat(post.rating)}
                   </div>
-
-                  
 
                   {/* ACTIONS */}
                   <div
@@ -260,7 +264,7 @@ function ViewPosts() {
                             });
 
                             setPosts((prev) =>
-                              prev.filter((p) => p._id !== post._id),
+                              prev.filter((p) => p._id !== post._id)
                             );
                           } catch {
                             alert("Error deleting post");
