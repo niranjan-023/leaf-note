@@ -8,13 +8,63 @@
   box-sizing: border-box;
 }
 
-html, body {
-  overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
-  background-color: #f8fafc;
-  color: #1e293b;
+
+
+/* ROOT */
+html {
+  scroll-behavior: smooth;
 }
 
+
+
+/* BODY */
+html,
+body {
+  overflow-x: hidden;
+
+  font-family: 'Inter', sans-serif;
+
+  background-color: #f8fafc;
+
+  color: #1e293b;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+}
+
+
+
+/* SELECTION */
+::selection {
+  background-color: #10b981;
+  color: white;
+}
+
+
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+
+/* FADE IN */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -31,6 +81,9 @@ html, body {
   animation: fade-in 0.25s ease-out;
 }
 
+
+
+/* SKELETON */
 @keyframes shimmer {
   0% {
     background-position: -450px 0;
@@ -50,5 +103,22 @@ html, body {
   );
 
   background-size: 400% 100%;
+
   animation: shimmer 1.4s ease infinite;
+}
+
+
+
+/* BUTTON TAP HIGHLIGHT */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+/* IMAGE RENDERING */
+img {
+  user-select: none;
+  -webkit-user-drag: none;
 }

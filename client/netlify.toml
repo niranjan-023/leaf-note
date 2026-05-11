@@ -1,0 +1,55 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+
+
+# =========================
+# SPA REDIRECTS
+# =========================
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
+
+# =========================
+# SECURITY HEADERS
+# =========================
+
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+
+    # Prevent clickjacking
+    X-Frame-Options = "DENY"
+
+    # Prevent MIME sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Basic XSS protection
+    X-XSS-Protection = "1; mode=block"
+
+    # Referrer policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Permissions Policy
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+    # Strict transport security
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+
+
+# =========================
+# CACHE STATIC ASSETS
+# =========================
+
+[[headers]]
+  for = "/assets/*"
+
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

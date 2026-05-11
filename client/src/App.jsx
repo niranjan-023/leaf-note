@@ -13,25 +13,28 @@ import PublicRoute from "./components/PublicRoute";
 import Books from "./pages/Books";
 import BookPosts from "./pages/BookPosts";
 import { Link } from "react-router-dom";
+import NotFound from "./pages/NotFound";
 
 function App() {
-	return (
-		<Routes>
-			<Route
-				path="/"
-				element={
-					<PublicRoute>
-						<Layout showAuthButtons={true}>
-							<div className="
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <PublicRoute>
+            <Layout showAuthButtons={true}>
+              <div
+                className="
     min-h-[75vh]
     flex
     flex-col
     items-center
     justify-center
     text-center
-  ">
-
-								<div className="
+  "
+              >
+                <div
+                  className="
       w-24
       h-24
       rounded-3xl
@@ -43,49 +46,52 @@ function App() {
       mb-8
       border
       border-gray-100
-    ">
-									<img
-										src="/images/logo.png"
-										alt="LeafNote"
-										className="w-16 h-16 object-contain"
-									/>
-								</div>
+    "
+                >
+                  <img
+                    src="/images/logo.png"
+                    alt="LeafNote"
+                    className="w-16 h-16 object-contain"
+                  />
+                </div>
 
-								<h1 className="
+                <h1
+                  className="
       text-6xl
       font-extrabold
       tracking-tight
       text-slate-800
       leading-tight
-    ">
-									Welcome to{" "}
-									<span className="text-emerald-600">
-										LeafNote
-									</span>
-								</h1>
+    "
+                >
+                  Welcome to <span className="text-emerald-600">LeafNote</span>
+                </h1>
 
-								<p className="
+                <p
+                  className="
       text-gray-500
       text-xl
       mt-6
       max-w-2xl
       leading-8
-    ">
-									Share book discussions, discover new reads,
-									and explore thoughts from a passionate reading community.
-								</p>
+    "
+                >
+                  Share book discussions, discover new reads, and explore
+                  thoughts from a passionate reading community.
+                </p>
 
-								<div className="
+                <div
+                  className="
       flex
       flex-col
       sm:flex-row
       gap-4
       mt-10
-    ">
-
-									<Link
-										to="/signup"
-										className="
+    "
+                >
+                  <Link
+                    to="/signup"
+                    className="
           bg-emerald-500
           hover:bg-emerald-600
           text-white
@@ -96,13 +102,13 @@ function App() {
           shadow-lg
           transition
         "
-									>
-										Get Started
-									</Link>
+                  >
+                    Get Started
+                  </Link>
 
-									<Link
-										to="/login"
-										className="
+                  <Link
+                    to="/login"
+                    className="
           bg-white
           hover:bg-gray-50
           border
@@ -113,105 +119,105 @@ function App() {
           font-semibold
           transition
         "
-									>
-										Login
-									</Link>
-								</div>
-							</div>
-						</Layout>
-					</PublicRoute>
-				}
-			/>
+                  >
+                    Login
+                  </Link>
+                </div>
+              </div>
+            </Layout>
+          </PublicRoute>
+        }
+      />
 
-			<Route
-				path="/login"
-				element={
-					<PublicRoute>
-						<Login />
-					</PublicRoute>
-				}
-			/>
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
 
-			<Route
-				path="/signup"
-				element={
-					<PublicRoute>
-						<Signup />
-					</PublicRoute>
-				}
-			/>
+      <Route
+        path="/signup"
+        element={
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        }
+      />
 
-			<Route
-				path="/home"
-				element={
-					<ProtectedRoute>
-						<Home />
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path="/new-post"
-				element={
-					<ProtectedRoute>
-						<NewPost />
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path="/post/:id"
-				element={
-					<ProtectedRoute>
-						<ReadMore />
-					</ProtectedRoute>
-				}
-			/>
-			<Route
-				path="/view-posts"
-				element={
-					<ProtectedRoute>
-						<ViewPosts />
-					</ProtectedRoute>
-				}
-			/>
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/new-post"
+        element={
+          <ProtectedRoute>
+            <NewPost />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/post/:id"
+        element={
+          <ProtectedRoute>
+            <ReadMore />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/view-posts"
+        element={
+          <ProtectedRoute>
+            <ViewPosts />
+          </ProtectedRoute>
+        }
+      />
 
-			<Route
-				path="/edit-post/:id"
-				element={
-					<ProtectedRoute>
-						<EditPost />
-					</ProtectedRoute>
-				}
-			/>
+      <Route
+        path="/edit-post/:id"
+        element={
+          <ProtectedRoute>
+            <EditPost />
+          </ProtectedRoute>
+        }
+      />
 
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
 
-			<Route
-				path="/profile"
-				element={
-					<ProtectedRoute>
-						<Profile />
-					</ProtectedRoute>
-				}
-			/>
+      <Route
+        path="/books"
+        element={
+          <ProtectedRoute>
+            <Books />
+          </ProtectedRoute>
+        }
+      />
 
-			<Route
-				path="/books"
-				element={
-					<ProtectedRoute>
-						<Books />
-					</ProtectedRoute>
-				}
-			/>
-
-			<Route
-				path="/book-posts/:title/:author"
-				element={
-					<ProtectedRoute>
-						<BookPosts />
-					</ProtectedRoute>
-				}
-			/>
-		</Routes>
-	);
+      <Route
+        path="/book-posts/:title/:author"
+        element={
+          <ProtectedRoute>
+            <BookPosts />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
 
 export default App;
