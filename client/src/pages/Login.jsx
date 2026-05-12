@@ -128,7 +128,7 @@ function Login() {
               shadow-md
             "
           >
-			{checking ? "Loggin In..." : "Login"}
+			{checking ? "Please Wait.." : "Login"}
           </button>
         </form>
 
